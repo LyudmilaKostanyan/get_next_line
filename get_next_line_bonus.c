@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static void	sjoins(char **s, char *s1)
 {
@@ -61,28 +61,28 @@ char	*get_next_line(int fd)
 {
 	char		*str;
 	int			i;
-	static char	*s;
+	static char	*s[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	infinity(fd, &s);
-	if (s == NULL)
+	infinity(fd, &(s[fd]));
+	if (s[fd] == NULL)
 		return (NULL);
-	i = ft_strchr(s, '\n');
+	i = ft_strchr(s[fd], '\n');
 	if (i > -1)
 	{
-		sdups(&s, &str, i);
+		sdups(&(s[fd]), &str, i);
 		return (str);
 	}
 	else
 	{
-		str = ft_strdup(s, 0, ft_strlen(s));
-		free(s);
-		s = NULL;
+		str = ft_strdup(s[fd], 0, ft_strlen(s[fd]));
+		free(s[fd]);
+		s[fd] = NULL;
 		if (*str != 0)
 			return (str);
 		free(str);
-		return (s);
+		return (s[fd]);
 	}
 }
 
@@ -112,33 +112,33 @@ char	*get_next_line(int fd)
 // 	s = get_next_line(fd);
 // 	printf("%s", s);
 // 	free(s);
+// 	s = get_next_line(fd);
+// 	printf("%s", s);
+// 	free(s);
+// 	s = get_next_line(fd);
+// 	printf("%s", s);
+// 	free(s);
+// 	s = get_next_line(fd);
+// 	printf("%s", s);
+// 	free(s);
+// 	s = get_next_line(fd);
+// 	printf("%s", s);
+// 	free(s);
+// 	s = get_next_line(fd);
+// 	printf("%s", s);
+// 	free(s);
+// 	s = get_next_line(fd);
+// 	printf("%s", s);
+// 	free(s);
+// 	s = get_next_line(fd);
+// 	printf("%s", s);
+// 	free(s);
+// 	s = get_next_line(fd);
+// 	printf("%s", s);
+// 	free(s);
+// 	s = get_next_line(fd);
+// 	printf("%s", s);
+// 	free(s);
 // 	system ("leaks a.out");
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
-// 	// s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
 // 	close(fd);
 // }
